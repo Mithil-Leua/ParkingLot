@@ -45,6 +45,7 @@ func (p *ParkingLot) Park(regno string, color string) {
 
 	if allottedSpace == -1 {
 		fmt.Println("Sorry, parking lot is full")
+		return
 	}
 
 	p.parkCarToSpace(MakeCar(regno, color), allottedSpace)
@@ -90,7 +91,7 @@ func (p ParkingLot) GetSlotNoOfColor(color string) {
 		if p.Space[i].Occupied {
 			car := p.Space[i].GetCarGivenSpace()
 			if &car != nil && car.GetColor() == color {
-				fmt.Println("%d", i+1)
+				fmt.Printf("%d\n", i+1)
 			}
 		}
 	}

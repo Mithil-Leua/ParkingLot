@@ -25,6 +25,12 @@ func main() {
 
 func processCommand(s string) {
 	values := strings.Split(s, " ")
+
+	if len(values) < 2 && values[0] != "status"{
+		fmt.Println("ACTION: Invalid command")
+		return
+	}
+
 	switch values[0] {
 	case "create_parking_lot":
 		n, err := strconv.Atoi(values[1])
@@ -44,5 +50,13 @@ func processCommand(s string) {
 		}
 	case "status":
 		plot.PrintParkingLot()
+	case "registration_numbers_for_cars_with_colour":
+		plot.GetCarDetailsOfAGivenColor(values[1])
+	case "slot_numbers_for_cars_with_colour":
+		plot.GetSlotNoOfColor(values[1])
+	case "slot_number_for_registration_number":
+		plot.GetSpaceOfACar(values[1])
+	default:
+		fmt.Println("ACTION: Invalid command")
 	}
 }
