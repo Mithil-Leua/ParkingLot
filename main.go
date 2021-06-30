@@ -35,5 +35,12 @@ func processCommand(s string) {
 		}
 	case "park":
 		plot.Park(values[1], values[2])
+	case "leave":
+		i, err := strconv.Atoi(values[1])
+		if err != nil {
+			fmt.Println("Invalid value for slot number.")
+		} else {
+			plot.Unpark(i)
+		}
 	}
 }

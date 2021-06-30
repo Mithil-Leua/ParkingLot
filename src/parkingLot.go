@@ -50,3 +50,16 @@ func (p *ParkingLot) Park(regno string, color string) {
 	p.parkCarToSpace(MakeCar(regno, color), allottedSpace)
 	fmt.Printf("Allocated slot number: %d\n", allottedSpace+1)
 }
+
+func (p *ParkingLot) Unpark(space int) {
+	if p == nil {
+		fmt.Println("No parking lot")
+		return
+	}
+	if space < 1 || space > p.Capacity {
+		fmt.Println("Invalid slot number.")
+	}
+	fmt.Printf("Slot number %d is free\n", space)
+	p.Space[space-1].FreeSpace()
+	p.FreeSlots++
+}
