@@ -24,14 +24,16 @@ func main() {
 }
 
 func processCommand(s string) {
-	args := strings.Split(s, " ")
-	switch args[0] {
+	values := strings.Split(s, " ")
+	switch values[0] {
 	case "create_parking_lot":
-		n, err := strconv.Atoi(args[1])
+		n, err := strconv.Atoi(values[1])
 		if err != nil {
 			fmt.Println("CREATE: Invalid value for number of slots.")
 		} else {
 			plot = parkingLot.NewParkingLot(n, make([]parkingLot.Space, n), n)
 		}
+	case "park":
+		plot.Park(values[1], values[2])
 	}
 }

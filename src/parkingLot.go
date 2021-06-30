@@ -1,5 +1,7 @@
 package parkingLot
 
+import "fmt"
+
 type ParkingLot struct {
 	Capacity  int
 	Space     []Space
@@ -32,4 +34,19 @@ func (p ParkingLot) availableSpace() int {
 		}
 	}
 	return -1
+}
+
+func (p *ParkingLot) Park(regno string, color string) {
+	if p == nil {
+		fmt.Println("No parking lot")
+	}
+
+	allottedSpace := p.availableSpace()
+
+	if allottedSpace == -1 {
+		fmt.Println("Sorry, parking lot is full")
+	}
+
+	p.parkCarToSpace(MakeCar(regno, color), allottedSpace)
+	fmt.Printf("Allocated slot number: %d\n", allottedSpace+1)
 }
