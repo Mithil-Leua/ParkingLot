@@ -1,6 +1,8 @@
 package parkingLot
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewParkingLot(t *testing.T) {
 	p := NewParkingLot(3, make([]Space, 3), 3)
@@ -49,5 +51,26 @@ func TestAvailableSpaceInvalidSpace(t *testing.T) {
 
 	if answer != -1 {
 		t.Fatalf("expected %d actual %d", 0, answer)
+	}
+}
+
+func TestParkingLot_ParkSuccess(t *testing.T) {
+	p := NewParkingLot(3, make([]Space, 3), 1)
+
+	p.Park("reg", "WHITE")
+
+	if p.FreeSlots != 0 {
+		t.Fatalf("expected %d actual %d", 0, p.FreeSlots)
+	}
+}
+
+func TestParkingLot_Unpark(t *testing.T) {
+	p := NewParkingLot(3, make([]Space, 3), 3)
+	p.Park("reg", "WHITE")
+
+	p.Unpark(1)
+	if (p.Space[0].Occupied) || p.FreeSlots != 3 {
+		t.Fatalf("expected %v actual %v", false, p.Space[0].Occupied)
+		t.Fatalf("expected %d actual %d", 3, p.FreeSlots)
 	}
 }
