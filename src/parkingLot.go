@@ -63,3 +63,48 @@ func (p *ParkingLot) Unpark(space int) {
 	p.Space[space-1].FreeSpace()
 	p.FreeSlots++
 }
+
+func (p ParkingLot) PrintParkingLot() {
+	fmt.Printf("Slot No.    Registration No    Colour\n")
+	for i := 0; i < p.Capacity; i++ {
+		if p.Space[i].Occupied {
+			car := p.Space[i].GetCarGivenSpace()
+			fmt.Printf("%d           %s      %s\n", i+1, car.GetRegNo(), car.GetColor())
+		}
+	}
+}
+
+func (p ParkingLot) GetCarDetailsOfAGivenColor(color string) {
+	for i := 0; i < p.Capacity; i++ {
+		if p.Space[i].Occupied {
+			car := p.Space[i].GetCarGivenSpace()
+			if &car != nil && car.GetColor() == color {
+				fmt.Printf("%s\n", car.GetRegNo())
+			}
+		}
+	}
+}
+
+func (p ParkingLot) GetSlotNoOfColor(color string) {
+	for i := 0; i < p.Capacity; i++ {
+		if p.Space[i].Occupied {
+			car := p.Space[i].GetCarGivenSpace()
+			if &car != nil && car.GetColor() == color {
+				fmt.Println("%d", i+1)
+			}
+		}
+	}
+}
+
+func (p ParkingLot) GetSpaceOfACar(regNo string) {
+	for i := 0; i < p.Capacity; i++ {
+		if p.Space[i].Occupied {
+			car:= p.Space[i].GetCarGivenSpace()
+			if &car != nil && car.GetRegNo() == regNo {
+				fmt.Printf("%d\n", i+1)
+				return
+			}
+		}
+	}
+	fmt.Printf("Not found\n")
+}

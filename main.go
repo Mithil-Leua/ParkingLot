@@ -42,5 +42,7 @@ func processCommand(s string) {
 		} else {
 			plot.Unpark(i)
 		}
+	case "status":
+		plot.PrintParkingLot()
 	}
 }
